@@ -72,17 +72,17 @@ jobs:
             cp -r deploy/* .
             
             # Stop and clean existing containers
-            sudo docker-compose -f docker/compose.production.yaml down 2>/dev/null || true
+            sudo docker compose -f docker/compose.production.yaml down 2>/dev/null || true
             sudo docker image prune -af >/dev/null 2>&1 || true
             
             # Start services
             echo "🚀 Deploying services..."
-            sudo docker-compose -f docker/compose.production.yaml up -d --build
+            sudo docker compose -f docker/compose.production.yaml up -d --build
             
             # Wait and verify
             sleep 20
             echo "📊 Service status:"
-            sudo docker-compose -f docker/compose.production.yaml ps
+            sudo docker compose -f docker/compose.production.yaml ps
 
       - name: Verify deployment
         uses: appleboy/ssh-action@v1.0.3
@@ -95,4 +95,4 @@ jobs:
             cd /home/${{ secrets.USERNAME }}/ecommerce-app
             # Test gateway endpoint (port 5921 as specified in architecture)
             curl -f http://localhost:5921/health && echo "✅ Deployment successful!" || echo "❌ Health check failed"
-            sudo docker-compose -f docker/compose.production.yaml ps
+            sudo docker compose -f docker/compose.production.yaml ps
