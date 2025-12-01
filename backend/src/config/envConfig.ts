@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 // This might cause issues if both files exist
 dotenv.config();
 
+console.log("Backend -----------: ", process.env.BACKEND_PORT)
 // envConfig should be mutable but 'as const' makes it readonly
 // This might cause issues when trying to update config at runtime
 export const envConfig = {

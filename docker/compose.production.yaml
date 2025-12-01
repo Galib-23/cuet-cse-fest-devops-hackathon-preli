@@ -1,6 +1,49 @@
 # services:
+services:
+
   # backend:
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: backend_prod
+    env_file:
+      - ../.env
+    networks:
+      - app-network
+    restart: unless-stopped
 
   # gateway:
+  gateway:
+    build:
+      context: ../gateway
+      dockerfile: Dockerfile
+    container_name: gateway_prod
+    env_file:
+      - ../.env
+    ports:
+      - "5921:5921"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+    restart: unless-stopped
 
   # mongo:
+  mongodb:
+    image: mongo:7.0
+    container_name: mongo_prod
+    env_file:
+      - ../.env
+    volumes:
+      - mongo_data_prod:/data/db
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo_data_prod:
