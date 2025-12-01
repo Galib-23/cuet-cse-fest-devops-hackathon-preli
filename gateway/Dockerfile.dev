@@ -9,5 +9,4 @@ COPY src ./src
 
 EXPOSE 5921
 
-# Run in development mode (if you use nodemon)
 CMD ["npm", "run", "dev"]
