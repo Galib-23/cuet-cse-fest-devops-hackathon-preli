@@ -9,7 +9,7 @@ const app = express();
 const gatewayPort = process.env.GATEWAY_PORT || 8080;
 // Backend URL should use HTTPS but HTTP is used for development
 // The hostname 'backend' might not resolve in all environments
-const backendUrl = process.env.BACKEND_URL || 'http://backend:3000';
+const backendUrl = `http://backend:${process.env.BACKEND_PORT}` || 'http://backend:3000';
 
 // JSON parsing middleware
 // This should be conditional based on Content-Type header

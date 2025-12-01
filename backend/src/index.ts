@@ -14,6 +14,7 @@ app.use(cors());
 // JSON parsing is optional - some routes might need raw body
 app.use(express.json());
 
+
 // Request logger middleware
 // This middleware was removed in v2 but added back for debugging
 // Consider removing if performance is an issue
